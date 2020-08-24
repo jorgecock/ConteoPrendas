@@ -25,12 +25,12 @@
 			<input type="number" name="unidadesesperadas">
 			<br>
 			<br>
-			<label for="tiempociclo">Tiempo de ciclo en minutos: (Tiempo de ritmo esperado entre prendas entregadas en el punto final)  </label>
-			<input type="number" name="tiempociclo">
+			<label for="tiempocicloesperado">Tiempo de ciclo en minutos: (Tiempo de ritmo esperado entre prendas entregadas en el punto final)  </label>
+			<input type="number" name="tiempocicloesperado">
 			<br>
 			<br>
-			<label for="minutos">Minutos de jornada programados para producir la referencia:  </label>
-			<input type="number" name="minutos">
+			<label for="minutosprogramados">Minutos de jornada programados para producir la referencia:  </label>
+			<input type="number" name="minutosprogramados">
 			<br>
 			<br>
 			<input type="submit" value="Programar Producción">

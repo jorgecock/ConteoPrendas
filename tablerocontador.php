@@ -1,56 +1,80 @@
 <?php
-	
+	$hora=time();
 	if (!empty($_POST)){
-		if ($_POST['inicio']==1){
+		if ($_POST['inicio']=="inicio"){
 			//iniciar datos de produccion en base de datos
+			
+			$unidadesesperadas=$_POST['unidadesesperadas'];
+			$tiempocicloesperado=$_POST['tiempocicloesperado'];
+			$minutosprogramados=$_POST['minutosprogramados'];
 			$cantidadhecha=0;
+			$primerapieza=1;
+			$horainicio=$hora;
+			$tiempoacumuladoparos=0;
 			$estado="corriendo";
-			$eficiencia=0;
+			$horabotonanterior=$horainicio;
+
+			$porcentajerealizado=0;
 
 
+			
 			include "conexion.php";
-			$hora=time();
-			$query = mysqli_query($conexion,"UPDATE conteoprendas SET cantidadhecha=0, estado='corriendo', eficiencia=0, horamarcada=$hora");
-
+			$query = mysqli_query($conexion,"UPDATE conteoprendas SET unidadesesperadas=$unidadesesperadas , tiempocicloesperado=$tiempocicloesperado, minutosprogramados=$minutosprogramados, cantidadhecha=$cantidadhecha, primerapieza=$primerapieza,horainicio=$horainicio, tiempoacumuladoparos=$tiempoacumuladoparos, estado=$estado, horabotonanterior=&horabotonanterior"); 
 			mysqli_close($conexion);
 
-		}else{
-			//dfsdf
+
+
+
 		}
-	}
+	} else {
 
+		echo "hola"
+ 
 
-	
-
-
-
-
-	include "conexion.php";
-	$query = mysqli_query($conexion,"SELECT * FROM conteoprendas");
-	mysqli_close($conexion);
-	$result = mysqli_num_rows($query);
-	if($result>0){
-		$data=mysqli_fetch_array($query);
+		include "conexion.php";
+		$query = mysqli_query($conexion,"SELECT * FROM conteoprendas");
+		mysqli_close($conexion);
+		$result = mysqli_num_rows($query);
+		if($result>0){
+			$data=mysqli_fetch_array($query);
 		
-		
-		$cantidadhecha=$data['cantidadhecha'];
-		$eficiencia=$data['eficiencia'];
-		$horamarcada=$data['horamarcada'];
-		$tiempopromedio=$data['tiempopromedio'];
-		$prendasesperadas=$data['prendasesperadas'];
-		$horainicio=$data['horainicio'];
-		$tiempoacumuladoparos=$data['tiempoacumuladoparos'];
-		$tiepotranscurrido=$data['tiempotranscurrido'];
-		$tiempocicloesperado=$data['tiempocicloesperado'];
-		
-		$porcentajerealizado=$cantidadhecha/$prendasesperadas;
-		
+			$unidadesesperadas=$data['unidadesesperadas'];
+			$tiempocicloesperado=$data['tiempocicloesperado'];
+			$minutosprogramados=$data['minutosprogramados'];
+			$cantidadhecha=$data['cantidadhecha'];
+			$primerapieza=$data['primerapieza'];
+			$horainicio=$data['horainicio'];
+			$tiempoacumuladoparos=$data['tiempoacumuladoparos'];
+			$estado=$data['estado'];
 
-		$ultimotiempodeoperacion=$data['ultimotiempodeoperacion'];
-		$ultimaeficiencia=$ultimotiempodeoperacion/$tiempocicloesperado;
-		$hora=time();
-		$eficienciaacumluada=$cantidadhecha/($tiempocicloesperado);
-		$estado="corriendo";
+			$porcentajerealizado=$cantidadhecha/$prendasesperadas;
+
+			
+			$eficiencia=$data['eficiencia'];
+			$horamarcada=$data['horamarcada'];
+			$tiempopromedio=$data['tiempopromedio'];
+			$prendasesperadas=$data['prendasesperadas'];
+			$horainicio=$data['horainicio'];
+			$tiempoacumuladoparos=$data['tiempoacumuladoparos'];
+			$tiepotranscurrido=$data['tiempotranscurrido'];
+			$tiempocicloesperado=$data['tiempocicloesperado'];
+			
+			
+			
+
+			$ultimotiempodeoperacion=$data['ultimotiempodeoperacion'];
+			$ultimaeficiencia=$ultimotiempodeoperacion/$tiempocicloesperado;
+			$hora=time();
+			$eficienciaacumluada=$cantidadhecha/($tiempocicloesperado);
+			$estado="corriendo";
+
+
+
+
+
+
+
+
 
 	}
 ?>
@@ -64,16 +88,18 @@
 	<meta http-equiv="refresh" content="30">
 </head>
 <body>
+	<!-- Encabezado -->
 	<h1>TABLERO DE SEGUIMIENTO</h1>
-	<br>
 	<h2>Estado: <?php echo $estado; ?></h2>
 
+	<!-- Prendas hechas vs programadas -->
 	<hr size="8px" color="black" />
 	<h2>Cantidad de prendas hechas: <?php echo $cantidadhecha; ?></h2>
-	<h2>Cantidad de prendas programadas: <?php echo $prendasesperadas; ?></h2>
+	<h2>Cantidad de prendas programadas: <?php echo $unidadesesperadas; ?></h2>
 	<h2>Porcentaje de la produccion programada realizado: <?php echo $porcentajerealizado; ?></h2>
-	
 	<br>
+	
+	<!-- valores de tiempo de operacion y eficiencia -->
 	<hr size="8px" color="black" />
 	<h2>Ultimo tiempo de operación: <?php echo $ultimotiempodeoperacion; ?></h2>
 	<h2>Ultima eficiencia: <?php echo $ultimaeficiencia; ?></h2>
