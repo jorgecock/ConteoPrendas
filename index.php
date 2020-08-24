@@ -1,5 +1,5 @@
 <?php
-
+	include "scripts.php";
 
 
 ?>
@@ -9,7 +9,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>Ingreso de datos de orden de producción</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body align='center'>
 

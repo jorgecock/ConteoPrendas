@@ -1,4 +1,6 @@
 <?php
+	include "scripts.php";
+
 
 	if (!empty($_POST))
 	{
@@ -10,8 +12,8 @@
 			$takt=$minutosprogramados/$unidadesesperadas;
 			$aceptable=0;
 
-			echo("<h1 align='center'>En la jornada programada de $minutos minutos se espera producir $unidadesesperadas unidades.</h1>"); 
-			echo("<h1 align='center'>El tiempo de ciclo estimado es de $tiempociclo minutos. <br>Se requiere un Takt Time de $takt minutos.</h1>"); 
+			echo("<h1 align='center'>En la jornada programada de $minutosprogramados minutos se espera producir $unidadesesperadas unidades.</h1>"); 
+			echo("<h1 align='center'>El tiempo de ciclo estimado es de $tiempocicloesperado minutos. <br>Se requiere un Takt Time de $takt minutos.</h1>"); 
 			if($tiempocicloesperado<=$takt)
 			{
 				echo "<h1 align='center'>El tiempo de ciclo es adecuado para cumplir con la demanda.<br><br>Si está de acuerdo, dar click en Iniciar Conteo para continuar</h1>";
@@ -32,7 +34,6 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Validacion para comenar el conteo</title>
 </head>
 <body>
